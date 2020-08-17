@@ -1,0 +1,99 @@
+html {
+    scroll-behavior: smooth;
+
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.navbar{
+    width: 100%;
+}
+
+.icon-size{
+    height: 30px;
+    width: 30px;
+}
+a h5{
+    color: black;
+    font-weight: bold;
+}
+.active-page{
+    border: 1px solid black !important;
+    border-radius: 5px !important;
+}
+.img-carousel {
+    width: 100%;
+    height: 24vw;
+    object-fit: cover;
+}
+a:hover{
+    color: black !important;
+}
+.tox-tinymce{
+    min-height: 400px !important;
+}
+
+#card-body>p{
+    color: grey!important;
+    text-decoration: unset!important;
+}
+
+body{
+    font-family: 'Manrope', sans-serif !important;
+}
+.grayColor{
+    color: grey;
+}
+
+.radius{
+    border-radius: 33px;
+}
+.margin-header{
+    margin-top: 66px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+footer a{
+    color: white;
+    text-decoration: none !important;
+}
+.bg-colorRed{
+    background-color: #ab0000;
+}
+
+.navbar-nav a{
+    color: red !important;
+    font-size: 22px;
+    font-weight: bold!important;
+}
+#content-news img{
+    max-width: 90%;
+}
+
+card a{
+    color: red;
+}
+
+@media (max-width: 992px) {
+    .navbar-nav a{
+        color: red !important;
+        font-size: 19px;
+        font-weight: bold!important;
+    }
+    .card-img-top {
+        width: 100%;
+        height: 35vw;
+        object-fit: cover;
+    }
+    .img-carousel {
+        width: 100%;
+        height: 54vw;
+        object-fit: cover;
+    }
+}
