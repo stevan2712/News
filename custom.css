@@ -72,6 +72,15 @@ footer a{
     font-size: 22px;
     font-weight: bold!important;
 }
+
+.navbar-nav a.active{
+    background-color: red !important;
+    border-radius: 30px !important;
+    color: white !important;
+    font-size: 22px;
+    font-weight: bold!important;
+}
+
 #content-news img{
     max-width: 90%;
 }
@@ -86,6 +95,15 @@ card a{
         font-size: 19px;
         font-weight: bold!important;
     }
+    .navbar-nav a.active{
+        background-color: white !important;
+        border-radius: 0px !important;
+        color: red !important;
+        font-size: 19px;
+        font-weight: bold!important;
+    }
+
+
     .card-img-top {
         width: 100%;
         height: 35vw;
@@ -97,3 +115,4 @@ card a{
         object-fit: cover;
     }
 }
+

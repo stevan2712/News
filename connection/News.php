@@ -82,6 +82,32 @@ public function newsWithoutTags(){
 
 
 }
+    public function getOtherNews(){
+
+        $sql = "
+                SELECT * 
+                FROM news 
+                WHERE NEWS_ID 
+                NOT IN (
+                    SELECT n.NEWS_ID 
+                    FROM news n 
+                    INNER JOIN newstag nt 
+                    ON n.NEWS_ID=nt.NEWS_ID 
+                    WHERE nt.TAG_ID = 4 
+                    OR nt.TAG_ID=5 
+                    OR nt.TAG_ID=2);
+";
+        $this->res = $this->connectToDatabase()->query($sql);
+        $this->numRows = $this->res->num_rows;
+        /*if($this->numRows > 0 ){
+            while ($row = $this->res->fetch_assoc()){
+                echo $row['TITLE']."<br>";
+            }
+        }*/
+
+
+    }
+
 
     public function newsWithoutTags2(){
 
@@ -301,7 +327,7 @@ public function getTagsForNews($news_id){
         $row = $this->res->fetch_assoc();
        if(is_null($row))
        {
-           echo $sql2;
+           //echo $sql2;
            $con2 = $this->connectToDatabase();
            $con2->query($sql2);
            return $con2->insert_id;
