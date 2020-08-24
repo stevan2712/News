@@ -19,7 +19,7 @@ require_once 'connection/News.php';
 </head>
 <body>
 <div class="bg-light">
-    <div class="container bg-white p-0">
+    <div class="container bg-light p-0">
         <header>
             <?php
             require_once ('header.php');
@@ -35,7 +35,7 @@ require_once 'connection/News.php';
                 <div class="carousel-inner">
                     <?php
                     $news = new News();
-                    $news->getOtherNews();
+                    $news->getOtherNews(0,3);
                     if($news->numRows > 0){
                         $counter = 0;
                         while ($row = $news->res->fetch_assoc()){
@@ -67,22 +67,35 @@ require_once 'connection/News.php';
 
         <main>
             <section class="newest_news">
-                <div class="row m-0">
-                    <div class="col-12 bg-danger my-3 radius">
-                        <h1 class="text-white text-center">Ostale vijesti</h1>
+                <div class="row">
+                    <div class="col-12 my-3">
+                        <h1 class="text-white text-center py-1 pl-4 bg-secondary">Ostale vijesti</h1>
                     </div>
                     <?php
+                    $results_per_page= 3 ;
                     $news = new News();
-                    $news->getOtherNews();
+                    $news2 = new News();
+                    $number_of_results = $news2->numOfOtherNews();
+                    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+                    if(!isset($_GET['page'])){
+                        $page=1;
+                        $_GET['page']=1;
+                    }else{
+                        $page=$_GET['page'];
+                    }
+                    $this_page_result = ($page-1)*$results_per_page;
+                    $news->getOtherNews( $this_page_result,$results_per_page);
                     if($news->numRows > 0){
                         $counter = 0;
                         while ($row = $news->res->fetch_assoc()){
                             ++$counter;
                             ?>
 
-                            <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4 py-2">
-                                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                        <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+<!--                            --><?php //echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?>
+                            <div class="col-12 col-lg-4 py-2">
+                                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100 news-card">
+                                        <img class="card-img-top2" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
                                         <div class="card-body" id="card-body">
                                             <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
                                             <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
@@ -97,6 +110,18 @@ require_once 'connection/News.php';
                     }
                     ?>
                 </div>
+
+                <div class="row links justify-content-center">
+                    <?php
+
+                    for($page=1;$page<=$number_of_pages;$page++){
+                        $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
+                        echo '<a class="px-2  '. $activeClass . '" href="othernews2.php?page='.$page.'"> ' . $page .  '</a>';
+
+                    }
+                    ?>
+                </div>
+
             </section>
         </main>
 

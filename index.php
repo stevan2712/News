@@ -19,7 +19,7 @@ require_once 'connection/News.php';
 </head>
 <body>
 <div class="bg-light">
-<div class="container bg-white p-0">
+<div class="container bg-light p-0">
     <header>
         <?php
         require_once ('header.php');
@@ -67,27 +67,35 @@ require_once 'connection/News.php';
 
     <main>
         <section class="newest_news">
-        <div class="row m-0">
-            <div class="col-12 my-3 bg-danger radius">
-                <h1 class="text-white text-center">Najnovije vijesti</h1>
+        <div class="row ">
+            <div class="col-12 mt-3 mb-1">
+                <h3 class="text-left py-2 pl-4 bg-secondary text-white">Najnovije vijesti</h3>
             </div>
             <?php
             $news = new News();
-            $news->getLastUpdatedNews();
+            $news->getLastUpdatedNewsIndexPage();
             if($news->numRows > 0){
                 $counter = 0;
             while ($row = $news->res->fetch_assoc()){
                 ++$counter;
             ?>
 
-            <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4">
-                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                    <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                    <div class="card-body" id="card-body">
-                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+            <div class="<?php if($counter > 3){echo "d-none d-lg-block";} ?> <?php echo $counter == 2 ? 'col-12 col-lg-6' : 'col-12 col-lg-3'; ?> py-0 py-lg-2">
+                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                    <div class="card h-100 news-card">
+                        <div class="row no-gutters">
+                            <div class="col-4 col-lg-12">
+                                <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                            </div>
+                            <div class="col-8 col-lg-12">
+                                <div class="card-body" id="card-body">
+                                    <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                    <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </div></a>
+                </a>
 
 
             </div>
@@ -100,9 +108,9 @@ require_once 'connection/News.php';
         </section>
 
         <section class="most_popular_news" id="popular">
-            <div class="row m-0">
-                <div class="col-12 bg-warning my-3 radius">
-                    <a href="NewsforTag.php?id_tag=<?php $news=new News(); $id=$news->mostPopularTag(); echo $id; ?>""><h1 class="text-white text-center">Najcitanije vijesti</h1></a>
+            <div class="row">
+                <div class="col-12 my-3 news-topic">
+                    <h3 class="bg-secondary py-2 pl-4"><a href="NewsforTag.php?id_tag=<?php $news=new News(); $id=$news->mostPopularTag(); echo $id; ?>"">Najcitanije vijesti </a></h3>
                 </div>
                 <?php
                 $news = new News();
@@ -113,14 +121,22 @@ require_once 'connection/News.php';
                         ++$counter;
                         ?>
 
-                        <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4">
-                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                    <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                                    <div class="card-body" id="card-body">
-                                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                        <div class="<?php echo $counter % 3 != 0 ? 'col-12' : 'col-12'; ?> col-lg-4">
+                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                                <div class="card h-100 news-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 col-lg-12">
+                                            <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="col-8 col-lg-12">
+                                            <div class="card-body" id="card-body">
+                                                <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </div>
+                            </a>
 
 
                         </div>
@@ -134,9 +150,9 @@ require_once 'connection/News.php';
         </section>
 
         <section class="football_news" id="football">
-            <div class="row m-0">
-                <div class="col-12 bg-primary my-3 radius">
-                   <a href="NewsforTag.php?id_tag=2"> <h1 class="text-white text-center">Fudbal vijesti</h1></a>
+            <div class="row">
+                <div class="col-12 my-3 news-topic">
+                  <h3 class="bg-secondary py-2 pl-4"> <a href="NewsforTag.php?id_tag=2"> Fudbal vijesti</a></h3>
                 </div>
                 <?php
                 $news = new News();
@@ -147,14 +163,22 @@ require_once 'connection/News.php';
                         ++$counter;
                         ?>
 
-                        <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4">
-                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                    <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                                    <div class="card-body" id="card-body">
-                                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                        <div class="<?php echo $counter % 3 != 0 ? 'col-12' : 'col-12'; ?> col-lg-4">
+                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                                <div class="card h-100 news-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 col-lg-12">
+                                            <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="col-8 col-lg-12">
+                                            <div class="card-body" id="card-body">
+                                                <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </div>
+                            </a>
 
 
                         </div>
@@ -168,9 +192,9 @@ require_once 'connection/News.php';
         </section>
 
         <section class="basketball_news" id="basketball">
-            <div class="row m-0">
-                <div class="col-12 bg-secondary my-3 radius">
-                    <a href="NewsforTag.php?id_tag=5"><h1 class="text-white text-center">Kosarka vijesti</h1></a>
+            <div class="row">
+                <div class="col-12 my-3 news-topic">
+                   <h3 class="py-2 pl-4 bg-secondary"> <a href="NewsforTag.php?id_tag=5">Kosarka vijesti</a></h3>
                 </div>
                 <?php
                 $news = new News();
@@ -181,14 +205,22 @@ require_once 'connection/News.php';
                         ++$counter;
                         ?>
 
-                        <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4">
-                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                    <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                                    <div class="card-body" id="card-body">
-                                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                        <div class="<?php echo $counter % 3 != 0 ? 'col-12' : 'col-12'; ?> col-lg-4">
+                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                                <div class="card h-100 news-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 col-lg-12">
+                                            <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="col-8 col-lg-12">
+                                            <div class="card-body" id="card-body">
+                                                <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </div>
+                            </a>
 
 
                         </div>
@@ -202,9 +234,9 @@ require_once 'connection/News.php';
         </section>
 
         <section class="other_news" id="other">
-            <div class="row m-0">
-                <div class="col-12 bg-dark radius my-3">
-                    <a href="othernews.php"><h1 class="text-white text-center">Ostale vijesti</h1></a>
+            <div class="row">
+                <div class="col-12 my-3 news-topic">
+                   <h3 class="py-2 pl-4 bg-secondary"> <a href="othernews.php">Ostale vijesti</a></h3>
                 </div>
                 <?php
                 $news = new News();
@@ -215,14 +247,22 @@ require_once 'connection/News.php';
                         ++$counter;
                         ?>
 
-                        <div class="<?php echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?> col-lg-4">
-                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                    <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                                    <div class="card-body" id="card-body">
-                                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                        <div class="<?php echo $counter % 3 != 0 ? 'col-12' : 'col-12'; ?> col-lg-4">
+                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                                <div class="card h-100 news-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 col-lg-12">
+                                            <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="col-8 col-lg-12">
+                                            <div class="card-body" id="card-body">
+                                                <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </div>
+                            </a>
 
 
                         </div>

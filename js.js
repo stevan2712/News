@@ -15,4 +15,15 @@ $(document).ready(function() {
         }
     })
 
+
+    $('input[type="file"]').change(function(e){
+        $('label[id*=custom-file-label]').empty();
+        var fileName = e.target.files[0].name;
+        console.log(fileName);
+        //$('#custom-file-label').html('');
+        $('#custom-file-label')
+            .append('<span>'+ fileName +'</span>');
+    })
+
+
 });

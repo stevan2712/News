@@ -23,6 +23,10 @@ require_once 'connection/News.php';
         }
 
     });
+    $(".picker").on("change", function() {
+        var date = $(this).val();
+        $(".date").val(date);
+    })
     </script>
 
 
@@ -144,8 +148,10 @@ require_once 'connection/News.php';
                         </div>
                         <div class="form-group">
                             <label>Date<span style="color: red">*</span></label>
-                            <input type="date" name="date" required max="3000-12-31"
-                                   min="1000-01-01" class="form-control">
+                            <div class="wrapper">
+                                <input class="date" type="date">
+                                <input class="picker" type="date">
+                            </div>
                         </div>
 
                         <label>Tags</label>

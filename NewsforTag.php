@@ -23,7 +23,7 @@ require_once 'connection/News.php';
 </head>
 <body>
 <div class="bg-light">
-    <div class="container bg-white p-0">
+    <div class="container bg-light p-0">
         <header>
             <?php
             require_once ('header.php');
@@ -71,9 +71,9 @@ require_once 'connection/News.php';
 
         <main>
             <section class="newest_news">
-                <div class="row m-0">
-                    <div class="col-12 bg-danger my-3 radius">
-                        <h1 class="text-white text-center">
+                <div class="row">
+                    <div class="col-12 my-3">
+                        <h1 class="text-white text-center py-1 pl-4 bg-secondary">
                             <?php
                             $news = new News();
                             $result= $news->tagName($_GET['id_tag']);
@@ -104,8 +104,8 @@ require_once 'connection/News.php';
                             ?>
 <!--                            --><?php //echo $counter % 3 != 0 ? 'col-6' : 'col-12'; ?>
                             <div class="col-12 col-lg-4 py-2">
-                                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100">
-                                        <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100 news-card">
+                                        <img class="card-img-top2" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
                                         <div class="card-body" id="card-body">
                                             <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
                                             <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
@@ -120,12 +120,12 @@ require_once 'connection/News.php';
                 </div>
 
 
-                <div class="row links justify-content-center">
+                <div class="row links justify-content-center" id="pagination-cont">
                 <?php
 
                 for($page=1;$page<=$number_of_pages;$page++){
                     $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
-                    echo '<a class="px-2  '. $activeClass . '" href="NewsforTag.php?page=' . $page .'&id_tag='. $_GET['id_tag'] . '"> ' . $page .  '</a>';
+                    echo '<a class="px-2  '. $activeClass . '" href="NewsforTag.php?id_tag='. $_GET['id_tag'] . '&page=' . $page .'"> ' . $page .  '</a>';
 
                 }
                 ?>
@@ -151,5 +151,24 @@ require_once 'connection/News.php';
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!--<script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+<script>
+    var N = <?php /*echo $number_of_pages */?>;
+    console.log('number of pages', N);
+    $('#pagination-cont').pagination({
+        dataSource: Array.apply(null, {length: N}).map(Number.call, Number),
+        alias: {
+            pageNumber: 'page'
+        },
+        callback: function(data, pagination) {
+            // template method of yourself
+            console.log(data);
+            var html = '';
+            data.forEach(el => html += '<span>' + (el + 1) + '</span>')
+            dataContainer.html(html);
+        }
+    })
+</script>-->
+
 </body>
 </html>

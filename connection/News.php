@@ -33,6 +33,19 @@ public function getAllNews(){
         }*/
 
     }
+    public function getLastUpdatedNewsIndexPage(){
+
+        $sql = "SELECT * FROM news 
+                ORDER BY DATE DESC LIMIT 7";
+        $this->res = $this->connectToDatabase()->query($sql);
+        $this->numRows = $this->res->num_rows;
+        /*if($numRows > 0){
+            while ($row = $res->fetch_assoc()){
+                echo $row['TITLE'];
+            }
+        }*/
+
+    }
 
     public function getFootballNews(){
 
@@ -82,7 +95,7 @@ public function newsWithoutTags(){
 
 
 }
-    public function getOtherNews(){
+    public function getOtherNews($page,$result){
 
         $sql = "
                 SELECT * 
@@ -95,7 +108,7 @@ public function newsWithoutTags(){
                     ON n.NEWS_ID=nt.NEWS_ID 
                     WHERE nt.TAG_ID = 4 
                     OR nt.TAG_ID=5 
-                    OR nt.TAG_ID=2);
+                    OR nt.TAG_ID=2) LIMIT $page, $result;
 ";
         $this->res = $this->connectToDatabase()->query($sql);
         $this->numRows = $this->res->num_rows;
@@ -109,13 +122,13 @@ public function newsWithoutTags(){
     }
 
 
-    public function newsWithoutTags2(){
+    public function newsWithoutTags2($page,$result){
 
         $sql = "SELECT n.TITLE,n.CONTENT,n.DATE,n.NEWS_ID,n.IMAGE 
             FROM news n 
             LEFT JOIN newstag nt 
             ON n.NEWS_ID=nt.NEWS_ID 
-            WHERE nt.TAG_ID IS NULL";
+            WHERE nt.TAG_ID IS NULL LIMIT $page, $result";
         $this->res = $this->connectToDatabase()->query($sql);
         $this->numRows = $this->res->num_rows;
         /*if($this->numRows > 0 ){
@@ -249,6 +262,51 @@ public function getTagsForNews($news_id){
         }*/
 
     }
+
+    public function numNewsWithoutTag(){
+
+        $sql = "SELECT COUNT(n.NEWS_ID) 
+                AS num_of_news FROM news n 
+                LEFT JOIN newstag nt 
+                ON n.NEWS_ID=nt.NEWS_ID 
+                WHERE nt.TAG_ID IS NULL";
+        $this->res = $this->connectToDatabase()->query($sql);
+        $row = $this->res->fetch_assoc();
+        return $row['num_of_news'];
+        /*if($numRows > 0){
+            while ($row = $res->fetch_assoc()){
+                echo $row['TITLE'];
+            }
+        }*/
+
+    }
+
+    public function numOfOtherNews(){
+
+        $sql = "SELECT COUNT(NEWS_ID) 
+                AS num_of_news
+                FROM news 
+                WHERE NEWS_ID 
+                NOT IN (
+                    SELECT n.NEWS_ID 
+                    FROM news n 
+                    INNER JOIN newstag nt 
+                    ON n.NEWS_ID=nt.NEWS_ID 
+                    WHERE nt.TAG_ID = 4 
+                    OR nt.TAG_ID=5 
+                    OR nt.TAG_ID=2)";
+        $this->res = $this->connectToDatabase()->query($sql);
+        $row = $this->res->fetch_assoc();
+        return $row['num_of_news'];
+        /*if($numRows > 0){
+            while ($row = $res->fetch_assoc()){
+                echo $row['TITLE'];
+            }
+        }*/
+
+    }
+
+
 
     public function getNewsforTag2($tag_id,$start_res,$num_res){
 

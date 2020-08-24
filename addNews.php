@@ -35,6 +35,7 @@ require_once 'connection/News.php';
             });
         });
     </script>
+    <script src="js.js"></script>
 
 
 
@@ -45,7 +46,7 @@ require_once 'connection/News.php';
 </head>
 <body>
 <div class="bg-light">
-    <div class="container bg-white p-0">
+    <div class="container bg-light p-0">
         <header>
             <?php
             require_once ('header.php');
@@ -67,63 +68,82 @@ require_once 'connection/News.php';
                 $content = $_POST['content'];
                 $date = $_POST['date'];
                 $image = $_FILES['image']['name'];
-
-                if($image=="")
+                if($_FILES['image']['name']=="")
                 {
                     $image="sport8.jpg";
-                }
+                    $_FILES['image']['name']="sport8";
+                    $_FILES['image']['type']="image/jpeg";
+                    $news = new News();
+                    $news_id = $news->insertNews($title,$content,$image,$date);
+                    echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt sa defaultnom slikom!</h4></div>";
+                    //echo json_encode($_POST['tags']);
+                    if(isset($_POST['tags'])){
+                        foreach($_POST['tags'] as $value) {
+                            $tag_name = strtolower($value);
+                            $tag_id = $news->isTagExist($tag_name);
+                            $news->addTagForNews($news_id,$tag_id);
+                        }
 
-
-                $check = getimagesize($_FILES["image"]["tmp_name"]);
-                if ($check !== false) {
-                    //echo "File is an image - " . $check["mime"] . ".";
-                    $uploadOk = 1;
-                } else {
-                    //echo "File is not an image.";
-                    $image="sport8.jpg";
-                    $uploadOk = 0;
-                }
-
-
-
-                //echo $_FILES["image"]["size"];
-
-                if ($_FILES["image"]["size"] > 5000000) {
-                    //echo "Sorry, your file is too large.";
-                    $uploadOk = 0;
-                }
-
-                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif" ) {
-                    //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                    $uploadOk = 0;
-                }
-                if ($uploadOk == 0) {
-                    //echo "Sorry, your file was not uploaded.";
-                } else {
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                        //echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-                    } else {
-                        //echo "Sorry, there was an error uploading your file.";
                     }
+
                 }
+                else{
+                    $check = getimagesize($_FILES["image"]["tmp_name"]);
+                    if ($check !== false) {
+                        //echo "File is an image - " . $check["mime"] . ".";
+                        $uploadOk = 1;
+                    } else {
+                        //echo "File is not an image.";
+                        $image="sport8.jpg";
+                        $uploadOk = 0;
+                    }
+
+
+
+                    //echo $_FILES["image"]["size"];
+
+                    if ($_FILES["image"]["size"] > 5000000) {
+                        //echo "Sorry, your file is too large.";
+                        $uploadOk = 0;
+                    }
+
+                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" ) {
+                        echo "<div class='container bg-success'><h4 class='text-center'>Dozvoljeni su samo JPG,JPEG,PNG i GIF formati...</h4></div>";
+                        //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                        $uploadOk = 0;
+                    }
+                    if ($uploadOk == 0) {
+                        //echo "Sorry, your file was not uploaded.";
+                    } else {
+                        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                            $news = new News();
+                            $news_id = $news->insertNews($title,$content,$image,$date);
+                            echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt!</h4></div>";
+                            //echo json_encode($_POST['tags']);
+                            if(isset($_POST['tags'])){
+                                foreach($_POST['tags'] as $value) {
+                                    $tag_name = strtolower($value);
+                                    $tag_id = $news->isTagExist($tag_name);
+                                    $news->addTagForNews($news_id,$tag_id);
+                                }
+
+                            }
+                        } else {
+                            //echo "Sorry, there was an error uploading your file.";
+                        }
+                    }
+
+                }
+
+
+
 
 
 
                 //echo $image;
 
-                $news = new News();
-                $news_id = $news->insertNews($title,$content,$image,$date);
-                echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt!</h4></div>";
-                //echo json_encode($_POST['tags']);
-                if(isset($_POST['tags'])){
-                    foreach($_POST['tags'] as $value) {
-                        $tag_name = strtolower($value);
-                        $tag_id = $news->isTagExist($tag_name);
-                        $news->addTagForNews($news_id,$tag_id);
-                    }
 
-                }
 
 
 
@@ -147,7 +167,7 @@ require_once 'connection/News.php';
                             <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
                                        aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="inputGroupFileAddon01"></label>
+                                <label class="custom-file-label" id="custom-file-label" for="inputGroupFileAddon01"></label>
                             </div>
                         </div>
                         <div class="form-group pt-3">
@@ -210,7 +230,7 @@ require_once 'connection/News.php';
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-<script src="js.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>

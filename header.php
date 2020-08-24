@@ -52,6 +52,7 @@
         let links = nav.getElementsByTagName('a');
 
         for (let link of links) {
+            //console.log(window.location.href, ' => ', link.href);
             if (window.location.href.includes(link.href)) {
                link.classList.add('active');
             } else {
