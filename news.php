@@ -23,7 +23,7 @@ require_once ('connection/News.php');
         ?></title>
 </head>
 <body>
-<div class="container p-0 bg-light">
+<div class="container p-0 px-2 px-lg-0 bg-light">
     <header>
         <?php
         require_once ('header.php');
@@ -75,13 +75,21 @@ require_once ('connection/News.php');
                         ?>
 
                         <div class="<?php echo $counter % 3 != 0 ? 'col-12' : 'col-12'; ?> col-lg-4 ">
-                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>"><div class="card h-100 news-card">
-                                    <img class="card-img-top2" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
-                                    <div class="card-body" id="card-body">
-                                        <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                        <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                            <a class="text-decoration-none" href="news.php?id=<?php echo $row['NEWS_ID'] ?>">
+                                <div class="card h-100 news-card">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 col-lg-12">
+                                            <img class="card-img-top" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
+                                        </div>
+                                        <div class="col-8 col-lg-12">
+                                            <div class="card-body" id="card-body">
+                                                <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
+                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div></a>
+                                </div>
+                            </a>
 
 
                         </div>
@@ -95,7 +103,8 @@ require_once ('connection/News.php');
         </section>
 
     </main>
-
+</div>
+<div class="container p-0">
     <footer>
         <?php
         require_once ('footer.php');
@@ -104,8 +113,8 @@ require_once ('connection/News.php');
 
     </footer>
 
-
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

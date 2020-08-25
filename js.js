@@ -13,7 +13,7 @@ $(document).ready(function() {
                     '<label class="form-check-label" for="defaultCheck1"">' + input + '</label></div>')
                 .append(`<br>`);
         }
-    })
+    });
 
 
     $('input[type="file"]').change(function(e){
@@ -23,7 +23,16 @@ $(document).ready(function() {
         //$('#custom-file-label').html('');
         $('#custom-file-label')
             .append('<span>'+ fileName +'</span>');
-    })
+    });
+
+
+ /*   $('p').contents().filter(function(){
+        return this.nodeType == 3 // Text node
+    }).each(function(){
+        this.data = this.data.replace('\u00a0',' ');
+    });*/
+
+
 
 
 });

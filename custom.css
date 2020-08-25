@@ -6,9 +6,26 @@ html {
 body {
     overflow-x: hidden;
 }
+.container{
+    overflow-x: hidden;
+}
 
 .navbar{
     width: 100%;
+}
+
+.elipsis-2-lines{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.content-div > p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .icon-size{

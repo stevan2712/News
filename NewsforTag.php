@@ -23,7 +23,7 @@ require_once 'connection/News.php';
 </head>
 <body>
 <div class="bg-light">
-    <div class="container bg-light p-0">
+    <div class="container bg-light p-0 px-2 px-lg-0">
         <header>
             <?php
             require_once ('header.php');
@@ -132,16 +132,18 @@ require_once 'connection/News.php';
                 </div>
             </section>
         </main>
+    </div>
 
+<div class="container p-0">
         <footer>
             <?php
             require_once ('footer.php');
             ?>
         </footer>
+</div>
 
 
 
-    </div>
 </div>
 
 
