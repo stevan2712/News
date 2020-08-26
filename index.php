@@ -111,7 +111,7 @@ require_once 'connection/News.php';
         <section class="most_popular_news" id="popular">
             <div class="row">
                 <div class="col-12 my-3 news-topic">
-                    <h3 class="bg-secondary py-2 pl-4"><a href="NewsforTag.php?id_tag=<?php $news=new News(); $id=$news->mostPopularTag(); echo $id; ?>"">Najcitanije vijesti </a></h3>
+                    <h3 class="bg-secondary py-2 pl-4"><a href="NewsforTag.php?id_tag=<?php $news=new News(); $id=$news->mostPopularTag(); echo $id; ?>"">Najčitanije vijesti </a></h3>
                 </div>
                 <?php
                 $news = new News();
@@ -195,7 +195,7 @@ require_once 'connection/News.php';
         <section class="basketball_news" id="basketball">
             <div class="row">
                 <div class="col-12 my-3 news-topic">
-                   <h3 class="py-2 pl-4 bg-secondary"> <a href="NewsforTag.php?id_tag=5">Kosarka vijesti</a></h3>
+                   <h3 class="py-2 pl-4 bg-secondary"> <a href="NewsforTag.php?id_tag=5">Košarka vijesti</a></h3>
                 </div>
                 <?php
                 $news = new News();

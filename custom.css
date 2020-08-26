@@ -102,7 +102,7 @@ footer a{
 
 .navbar-nav a{
     color: red !important;
-    font-size: 22px;
+    font-size: 19px;
     font-weight: bold!important;
 }
 
@@ -125,7 +125,7 @@ card a{
 @media (max-width: 992px) {
     .navbar-nav a{
         color: red !important;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: bold!important;
     }
     .navbar-nav a.active{

@@ -157,12 +157,12 @@ require_once 'connection/News.php';
                 <div class="col-12 col-xl-6">
                     <form action="addNews.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group pt-2">
-                            <label>Title<span style="color: red">*</span> </label>
+                            <label>Naslov<span style="color: red">*</span> </label>
                             <input type="text" class="form-control" required name="title" id="title" placeholder="Add a title">
                         </div>
                         <div class="input-group pt-1">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">Upload Image</span>
+                                <span class="input-group-text" id="inputGroupFileAddon01">Dodaj Sliku</span>
                             </div>
                             <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile01"
@@ -171,7 +171,7 @@ require_once 'connection/News.php';
                             </div>
                         </div>
                         <div class="form-group pt-3">
-                            <label>Content<span style="color: red">*</span></label>
+                            <label>Sadržaj<span style="color: red">*</span></label>
                             <textarea class="form-control" name="content" id="mytextarea" required rows="3"></textarea>
                         </div>
 <!--                        <style type="text/css">-->
@@ -190,7 +190,7 @@ require_once 'connection/News.php';
 <!--                        </style>-->
 
                         <div class="form-group">
-                            <label>Date<span style="color: red">*</span></label>
+                            <label>Datum<span style="color: red">*</span></label>
                             <div >
                                 <input type="date" name="date" required max="3000-12-31"
                                        id="date-test"
