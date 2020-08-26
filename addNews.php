@@ -57,99 +57,96 @@ require_once 'connection/News.php';
 
         <main class="pt-3 margin-header">
             <?php
+            $errors = [];
 
-            if(isset($_POST['submit'])){
-                $title = $_POST['title'];
-                $target_dir = "image/";
-                $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            function processSubmit() {
+                if(isset($_POST['submit'])){
+                    $title = $_POST['title'];
+                    $target_dir = "image/";
+                    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                    $uploadOk = 1;
+                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-                $content = $_POST['content'];
-                $date = $_POST['date'];
-                $image = $_FILES['image']['name'];
-                if($_FILES['image']['name']=="")
-                {
-                    $image="sport8.jpg";
-                    $_FILES['image']['name']="sport8";
-                    $_FILES['image']['type']="image/jpeg";
-                    $news = new News();
-                    $news_id = $news->insertNews($title,$content,$image,$date);
-                    echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt sa defaultnom slikom!</h4></div>";
-                    //echo json_encode($_POST['tags']);
-                    if(isset($_POST['tags'])){
-                        foreach($_POST['tags'] as $value) {
-                            $tag_name = strtolower($value);
-                            $tag_id = $news->isTagExist($tag_name);
-                            $news->addTagForNews($news_id,$tag_id);
-                        }
+                    $content = $_POST['content'];
 
+                    if (empty($content)) {
+                        global $errors;
+                        $errors['sadrzaj'] = 'It is required field';
+                        return;
                     }
 
-                }
-                else{
-                    $check = getimagesize($_FILES["image"]["tmp_name"]);
-                    if ($check !== false) {
-                        //echo "File is an image - " . $check["mime"] . ".";
-                        $uploadOk = 1;
-                    } else {
-                        //echo "File is not an image.";
+                    $date = $_POST['date'];
+                    $image = $_FILES['image']['name'];
+                    if($_FILES['image']['name']=="")
+                    {
                         $image="sport8.jpg";
-                        $uploadOk = 0;
-                    }
-
-
-
-                    //echo $_FILES["image"]["size"];
-
-                    if ($_FILES["image"]["size"] > 5000000) {
-                        //echo "Sorry, your file is too large.";
-                        $uploadOk = 0;
-                    }
-
-                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                        && $imageFileType != "gif" ) {
-                        echo "<div class='container bg-success'><h4 class='text-center'>Dozvoljeni su samo JPG,JPEG,PNG i GIF formati...</h4></div>";
-                        //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                        $uploadOk = 0;
-                    }
-                    if ($uploadOk == 0) {
-                        //echo "Sorry, your file was not uploaded.";
-                    } else {
-                        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                            $news = new News();
-                            $news_id = $news->insertNews($title,$content,$image,$date);
-                            echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt!</h4></div>";
-                            //echo json_encode($_POST['tags']);
-                            if(isset($_POST['tags'])){
-                                foreach($_POST['tags'] as $value) {
-                                    $tag_name = strtolower($value);
-                                    $tag_id = $news->isTagExist($tag_name);
-                                    $news->addTagForNews($news_id,$tag_id);
-                                }
-
+                        $_FILES['image']['name']="sport8";
+                        $_FILES['image']['type']="image/jpeg";
+                        $news = new News();
+                        $news_id = $news->insertNews($title,$content,$image,$date);
+                        echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt sa defaultnom slikom!</h4></div>";
+                        //echo json_encode($_POST['tags']);
+                        if(isset($_POST['tags'])){
+                            foreach($_POST['tags'] as $value) {
+                                $tag_name = strtolower($value);
+                                $tag_id = $news->isTagExist($tag_name);
+                                $news->addTagForNews($news_id,$tag_id);
                             }
-                        } else {
-                            //echo "Sorry, there was an error uploading your file.";
+
                         }
+
                     }
+                    else{
+                        $check = getimagesize($_FILES["image"]["tmp_name"]);
+                        if ($check !== false) {
+                            //echo "File is an image - " . $check["mime"] . ".";
+                            $uploadOk = 1;
+                        } else {
+                            //echo "File is not an image.";
+                            $image="sport8.jpg";
+                            $uploadOk = 0;
+                        }
 
+
+
+                        //echo $_FILES["image"]["size"];
+
+                        if ($_FILES["image"]["size"] > 5000000) {
+                            //echo "Sorry, your file is too large.";
+                            $uploadOk = 0;
+                        }
+
+                        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                            && $imageFileType != "gif" ) {
+                            echo "<div class='container bg-success'><h4 class='text-center'>Dozvoljeni su samo JPG,JPEG,PNG i GIF formati...</h4></div>";
+                            //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                            $uploadOk = 0;
+                        }
+                        if ($uploadOk == 0) {
+                            //echo "Sorry, your file was not uploaded.";
+                        } else {
+                            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                                $news = new News();
+                                $news_id = $news->insertNews($title,$content,$image,$date);
+                                echo "<div class='container bg-success'><h4 class='text-center'>Vijest je uspjesno dodana na sajt!</h4></div>";
+                                //echo json_encode($_POST['tags']);
+                                if(isset($_POST['tags'])){
+                                    foreach($_POST['tags'] as $value) {
+                                        $tag_name = strtolower($value);
+                                        $tag_id = $news->isTagExist($tag_name);
+                                        $news->addTagForNews($news_id,$tag_id);
+                                    }
+
+                                }
+                            } else {
+                                //echo "Sorry, there was an error uploading your file.";
+                            }
+                        }
+
+                    }
                 }
-
-
-
-
-
-
-                //echo $image;
-
-
-
-
-
-
-
             }
+            processSubmit();
             ?>
             <h1 class="text-center">Dodavanje vijesti na sajt:</h1>
 
@@ -172,7 +169,8 @@ require_once 'connection/News.php';
                         </div>
                         <div class="form-group pt-3">
                             <label>Sadržaj<span style="color: red">*</span></label>
-                            <textarea class="form-control" name="content" id="mytextarea" required rows="3"></textarea>
+                            <textarea class="form-control" name="content" id="mytextarea" rows="3"></textarea>
+                            <p style="color: red; padding-left: 10px;"><?php if(array_key_exists('sadrzaj', $errors)) echo $errors['sadrzaj']; ?></p>
                         </div>
 <!--                        <style type="text/css">-->
 <!--                            input[type="date"]::-webkit-calendar-picker-indicator {-->
