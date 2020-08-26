@@ -84,7 +84,7 @@ require_once ('connection/News.php');
                                         <div class="col-8 col-lg-12">
                                             <div class="card-body" id="card-body">
                                                 <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                                <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
                                             </div>
                                         </div>
                                     </div>

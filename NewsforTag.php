@@ -73,7 +73,7 @@ require_once 'connection/News.php';
             <section class="newest_news">
                 <div class="row">
                     <div class="col-12 my-3">
-                        <h1 class="text-white text-center py-1 pl-4 bg-secondary">
+                        <h1 class="text-white text-center py-1 bg-secondary">
                             <?php
                             $news = new News();
                             $result= $news->tagName($_GET['id_tag']);
@@ -108,7 +108,7 @@ require_once 'connection/News.php';
                                         <img class="card-img-top2" src="image/<?php echo $row['IMAGE']; ?>" alt="Card image cap">
                                         <div class="card-body" id="card-body">
                                             <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                            <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                            <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
                                         </div>
                                     </div></a>
                             </div>

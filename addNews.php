@@ -174,10 +174,29 @@ require_once 'connection/News.php';
                             <label>Content<span style="color: red">*</span></label>
                             <textarea class="form-control" name="content" id="mytextarea" required rows="3"></textarea>
                         </div>
+<!--                        <style type="text/css">-->
+<!--                            input[type="date"]::-webkit-calendar-picker-indicator {-->
+<!--                                background: transparent;-->
+<!--                                bottom: 0;-->
+<!--                                color: transparent;-->
+<!--                                cursor: pointer;-->
+<!--                                height: auto;-->
+<!--                                left: 0;-->
+<!--                                position: absolute;-->
+<!--                                right: 0;-->
+<!--                                top: 0;-->
+<!--                                width: auto;-->
+<!--                            }-->
+<!--                        </style>-->
+
                         <div class="form-group">
                             <label>Date<span style="color: red">*</span></label>
-                            <input type="date" name="date" required max="3000-12-31"
-                                   min="1000-01-01" class="form-control">
+                            <div >
+                                <input type="date" name="date" required max="3000-12-31"
+                                       id="date-test"
+                                       min="1000-01-01" class="form-control">
+                            </div>
+
                         </div>
 
                         <div class="form-group">

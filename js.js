@@ -24,6 +24,7 @@ $(document).ready(function() {
         $('#custom-file-label')
             .append('<span>'+ fileName +'</span>');
     });
+    $('#date-test').val(new Date().toDateInputValue());
 
 
  /*   $('p').contents().filter(function(){
@@ -36,3 +37,24 @@ $(document).ready(function() {
 
 
 });
+
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
+// function openPicker(e) {
+//     //alert('hii')
+//     let dateInput = document.getElementById('date-test');
+//     var ev = dateInput.createEvent('KeyboardEvent');
+//     console.log('init', ev.initKeyboardEvent('keydown', true, true, document.defaultView, 'F4', 0));
+//     console.log('dispatchEvent', inputDateElem.dispatchEvent(ev));
+//     setTimeout(function () {
+//         console.log('init', ev.initKeyboardEvent('keydown', true, true, document.defaultView, '5', 0));
+//         console.log('init', ev.initKeyboardEvent('keydown', true, true, document.defaultView, '5', 0));
+//         console.log('init', ev.initKeyboardEvent('keydown', true, true, document.defaultView, '5', 0));
+//         console.log(document.getElementById('date-test').dispatchEvent(new KeyboardEvent('keypress',{'key':'5'})));
+//     }, 1000)
+//
+// }

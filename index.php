@@ -90,7 +90,7 @@ require_once 'connection/News.php';
                             <div class="col-8 col-lg-12">
                                 <div class="card-body" id="card-body">
                                     <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                    <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                    <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
 <!--                                    <div class="elipsis-2-lines content-div">--><?php //echo $row['CONTENT']; ?><!--</div>-->
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ require_once 'connection/News.php';
                                         <div class="col-8 col-lg-12">
                                             <div class="card-body" id="card-body">
                                                 <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                                <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@ require_once 'connection/News.php';
                                         <div class="col-8 col-lg-12">
                                             <div class="card-body" id="card-body">
                                                 <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                                <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@ require_once 'connection/News.php';
                                         <div class="col-8 col-lg-12">
                                             <div class="card-body" id="card-body">
                                                 <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                                <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@ require_once 'connection/News.php';
                                         <div class="col-8 col-lg-12">
                                             <div class="card-body" id="card-body">
                                                 <p><?php echo date('d-M-Y', strtotime($row['DATE']) ); ?></p>
-                                                <h5 class="card-title text-center"><?php echo $row['TITLE']; ?></h5>
+                                                <h5 class="card-title"><?php echo $row['TITLE']; ?></h5>
 <!--                                                <p class="elipsis-2-lines">--><?php //echo $row['CONTENT']; ?><!--</p>-->
                                             </div>
                                         </div>
