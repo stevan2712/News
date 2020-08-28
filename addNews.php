@@ -62,6 +62,7 @@ require_once 'connection/News.php';
             function processSubmit() {
                 if(isset($_POST['submit'])){
                     $title = $_POST['title'];
+                    $title = strpos($title, "'") ? str_replace("'","\'",$title) : $title;
                     $target_dir = "image/";
                     $target_file = $target_dir . basename($_FILES["image"]["name"]);
                     $uploadOk = 1;
@@ -69,9 +70,15 @@ require_once 'connection/News.php';
 
                     $content = $_POST['content'];
 
+
                     if (empty($content)) {
                         global $errors;
-                        $errors['sadrzaj'] = 'It is required field';
+                        $errors['sadrzaj'] = 'Ovo je obavezno polje';
+                        return;
+                    }
+                    if(ctype_space($title)){
+                        global $errors;
+                        $errors['naslov'] = 'Ne mozete unijeti samo razmak';
                         return;
                     }
 
@@ -155,7 +162,8 @@ require_once 'connection/News.php';
                     <form action="addNews.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group pt-2">
                             <label>Naslov<span style="color: red">*</span> </label>
-                            <input type="text" class="form-control" required name="title" id="title" placeholder="Add a title">
+                            <input type="text" class="form-control" name="title" id="title" placeholder="Upišite naslov" required>
+                            <p style="color: red; padding-left: 10px;"><?php if(array_key_exists('naslov', $errors)) echo $errors['naslov']; ?></p>
                         </div>
                         <div class="input-group pt-1">
                             <div class="input-group-prepend">

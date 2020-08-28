@@ -122,11 +122,15 @@ require_once 'connection/News.php';
 
                 <div class="row links justify-content-center" id="pagination-cont">
                 <?php
+                if ($number_of_pages==1){
 
-                for($page=1;$page<=$number_of_pages;$page++){
-                    $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
-                    echo '<a class="px-2  '. $activeClass . '" href="NewsforTag.php?id_tag='. $_GET['id_tag'] . '&page=' . $page .'"> ' . $page .  '</a>';
+                }
+                else {
+                    for ($page = 1; $page <= $number_of_pages; $page++) {
+                        $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
+                        echo '<a class="px-2  ' . $activeClass . '" href="NewsforTag.php?id_tag=' . $_GET['id_tag'] . '&page=' . $page . '"> ' . $page . '</a>';
 
+                    }
                 }
                 ?>
                 </div>

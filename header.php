@@ -11,7 +11,7 @@
                 <a class="nav-link dropdown-toggle pl-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    <span class="d-inline d-lg-none "> Fudbal</span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu border-0" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=30">Liga šampiona</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=31">Liga evrope</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=2">Sve</a>
@@ -22,7 +22,7 @@
                 <a class="nav-link dropdown-toggle pl-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="d-inline d-lg-none "> Košarka</span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu border-0" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=32">Nba liga</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=33">Euroliga</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=5">Sve</a>
@@ -33,7 +33,7 @@
                 <a class="nav-link dropdown-toggle pl-0" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="d-inline d-lg-none "> Tenis</span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu border-0" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=34">ATP</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=35">WTA</a>
                     <a class="dropdown-item" href="NewsforTag.php?id_tag=4">Sve</a>

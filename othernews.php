@@ -72,7 +72,7 @@ require_once 'connection/News.php';
                         <h1 class="text-white text-center py-1 bg-secondary">Ostale vijesti</h1>
                     </div>
                     <?php
-                    $results_per_page= 2 ;
+                    $results_per_page= 9 ;
                     $news = new News();
                     $news2 = new News();
                     $number_of_results = $news2->numNewsWithoutTag();
@@ -113,11 +113,15 @@ require_once 'connection/News.php';
 
                 <div class="row links justify-content-center">
                     <?php
+                    if ($number_of_pages==1){
 
-                    for($page=1;$page<=$number_of_pages;$page++){
-                        $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
-                        echo '<a class="px-2  '. $activeClass . '" href="othernews.php?page='.$page.'"> ' . $page .  '</a>';
+                    }
+                    else {
+                        for ($page = 1; $page <= $number_of_pages; $page++) {
+                            $activeClass = isset($_GET['page']) && $_GET['page'] == $page ? 'active-page' : '';
+                            echo '<a class="px-2  ' . $activeClass . '" href="othernews.php?page=' . $page . '"> ' . $page . '</a>';
 
+                        }
                     }
                     ?>
                 </div>
